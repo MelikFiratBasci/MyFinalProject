@@ -38,11 +38,6 @@ namespace DataAccess.Concrete.InMemory
             return _products;
         }
 
-        public List<Product> GetAllByCategory(int categoryID)
-        {
-            return _products.Where(p => p.CategoyId == categoryID  ).ToList();
-        }
-
         public void Update(Product product)
         {
             //productta olan urun id sine sahip urunu listeden bul ve ata ;
@@ -52,6 +47,11 @@ namespace DataAccess.Concrete.InMemory
             productToUpdate.UnitPrice = product.UnitPrice;
             productToUpdate.UnitsInStock = product.UnitsInStock;
             
+        }
+        public List<Product> GetAllByCategory(int categoryID)
+        {
+            return _products.Where(p => p.CategoyId == categoryID).ToList();
+            //where kosulu icindeki sarta uyanlari yeni liste yapip dondurur.
         }
     }
 }

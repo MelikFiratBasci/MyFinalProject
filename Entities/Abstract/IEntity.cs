@@ -5,7 +5,7 @@ using System.Text;
 namespace Entities.Abstract
 {
     //IEntity implement eden class bir veritabani tablosudur
-    interface IEntity
+    public interface IEntity
     {
     }
 }
