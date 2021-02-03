@@ -25,6 +25,16 @@ namespace Business.Concrete
             //Yetkisi var mi
             return _productDal.GetAll();
         }
+
+        public List<Product> GetAllByCategoryId(int id)
+        {
+            return _productDal.GetAll(p => p.CategoyId == id);
+        }
+
+        public List<Product> GetByUnitPrice(decimal min, decimal max)
+        {
+            return _productDal.GetAll(p => max >= p.UnitPrice && p.UnitPrice>=min);
+        }
     }
 
     
