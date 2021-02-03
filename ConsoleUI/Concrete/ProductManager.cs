@@ -22,7 +22,7 @@ namespace Business.Concrete
         public List<Product> GetAll()
         {
             //is kodlari , BIR IS SINIFI BASKA SINIFLARI NEWLEMEZ!!
-            //Yetkisi var mi
+            //Yetkis var mi
             return _productDal.GetAll();
         }
     }
