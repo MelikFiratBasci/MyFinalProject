@@ -14,11 +14,11 @@ namespace DataAccess.Concrete.InMemory
         public InMemoryProductDal()
         {
             _products = new List<Product> {
-                new Product{ProductId= 1,CategoyId=1,ProductName="Bardak",UnitPrice=15,UnitsInStock=15 },
-                new Product{ProductId= 2,CategoyId=2,ProductName="Kamera",UnitPrice=500,UnitsInStock=3 },
-                new Product{ProductId= 3,CategoyId=2,ProductName="Telefon",UnitPrice=1500,UnitsInStock=2 },
-                new Product{ProductId= 4,CategoyId=2,ProductName="Klavye",UnitPrice=150,UnitsInStock=65 },
-                new Product{ProductId= 5,CategoyId=2,ProductName="Fare",UnitPrice=85,UnitsInStock=1 }
+                new Product{ProductId= 1,CategoryId=1,ProductName="Bardak",UnitPrice=15,UnitsInStock=15 },
+                new Product{ProductId= 2,CategoryId=2,ProductName="Kamera",UnitPrice=500,UnitsInStock=3 },
+                new Product{ProductId= 3,CategoryId=2,ProductName="Telefon",UnitPrice=1500,UnitsInStock=2 },
+                new Product{ProductId= 4,CategoryId=2,ProductName="Klavye",UnitPrice=150,UnitsInStock=65 },
+                new Product{ProductId= 5,CategoryId=2,ProductName="Fare",UnitPrice=85,UnitsInStock=1 }
             };
         }
         public void Add(Product product)
@@ -44,14 +44,14 @@ namespace DataAccess.Concrete.InMemory
             //productta olan urun id sine sahip urunu listeden bul ve ata ;
             Product productToUpdate = _products.SingleOrDefault(p => p.ProductId == product.ProductId);
             productToUpdate.ProductName = product.ProductName;
-            productToUpdate.CategoyId = product.CategoyId;
+            productToUpdate.CategoryId = product.CategoryId;
             productToUpdate.UnitPrice = product.UnitPrice;
             productToUpdate.UnitsInStock = product.UnitsInStock;
 
         }
         public List<Product> GetAllByCategory(int categoryID)
         {
-            return _products.Where(p => p.CategoyId == categoryID).ToList();
+            return _products.Where(p => p.CategoryId == categoryID).ToList();
             //where kosulu icindeki sarta uyanlari yeni liste yapip dondurur.
         }
 
