@@ -21,7 +21,7 @@ namespace DataAccess.Concrete.EntityFramework
                 context.SaveChanges();
             }
         }
-
+        
         public void Delete(Product entity)
         {
             using (NorthwindContext context = new NorthwindContext())
