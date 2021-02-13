@@ -11,7 +11,7 @@ namespace Core.Utilities.Concrete
             
         }
 
-        public SuccessResult():base(false)
+        public SuccessResult():base(true)
         {
 
         }

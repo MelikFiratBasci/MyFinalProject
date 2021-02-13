@@ -14,6 +14,10 @@ namespace Core.Utilities.Concrete
         {
             Data = data;
         }
+        public DataResult(bool success , string message ):base(success, message)
+        {
+
+        }
         public DataResult(bool success) : base(success) 
         {
 
