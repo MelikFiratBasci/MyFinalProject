@@ -33,6 +33,10 @@ namespace Business.Concrete
         {
             //is kodlari , BIR IS SINIFI BASKA SINIFLARI NEWLEMEZ!!
             //Yetkisi var mi
+            if (DateTime.Now.Hour ==20)
+            {
+                return new ErorDataResult<List<Product>>("Sistem Bakimda");
+            }
             return new SuccessDataResult<List<Product>>(_productDal.GetAll());
         }
 
