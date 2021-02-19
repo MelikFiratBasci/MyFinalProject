@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Core.Utilities.Results;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Utilities.Concrete
+namespace Core.Utilities.Concrete.Results
 {
     public class Result : IResult
     {

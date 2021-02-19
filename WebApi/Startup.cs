@@ -31,8 +31,8 @@ namespace WebApi
         {
             //Autofac,Ninject,CastleWindsor,StructureMap,LigtInject,DryInject -->IOC container altyapisi saglar 
             services.AddControllers();
-            services.AddSingleton<IProductService, ProductManager>();//IoC icin bana arka planda referans olustur,bu tipte bagimlilik gorursen bu tipte referans
-            services.AddSingleton<IProductDal, EfProductDal>();
+            //services.AddSingleton<IProductService, ProductManager>();//IoC icin bana arka planda referans olustur,bu tipte bagimlilik gorursen bu tipte referans
+            //services.AddSingleton<IProductDal, EfProductDal>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
