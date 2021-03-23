@@ -1,3 +1,5 @@
+using Core.DependencyResolvers;
+using Core.Extensions;
 using Core.Utilities.IoC;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
@@ -48,8 +50,9 @@ namespace WebApi
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            ServiceTool.Create(services);
+            services.AddDependencyResolvers(new ICoreModule[] {
+            new CoreModule()//bu sayede yeni moduller olusturursak onlari buraya ekleyebiliriz. 
+            });//core katmani da dahil tum katmanlardaki dependency injectionlari bir araya almamizi saglar.
 
         }
 
