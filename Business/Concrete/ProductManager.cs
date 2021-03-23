@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -18,14 +19,14 @@ namespace Business.Concrete
     //manager gorursen is katmaninin soyut sinifi 
     {
         IProductDal _productDal;//Injection //soyut nesneyle baglanti kur.
-        ICategoryService _categoryService; 
-        public ProductManager(IProductDal productDal,ICategoryService categoryService)
+        ICategoryService _categoryService;
+        public ProductManager(IProductDal productDal, ICategoryService categoryService)
         {
             _productDal = productDal;
             _categoryService = categoryService;
 
         }
-
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
@@ -41,7 +42,7 @@ namespace Business.Concrete
             }
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);
-            
+
 
         }
 
@@ -51,7 +52,7 @@ namespace Business.Concrete
             //Yetkisi var mi
             if (DateTime.Now.Hour == 20)
             {
-                return new ErorDataResult<List<Product>>("Sistem Bakimda");
+                return new ErrorDataResult<List<Product>>("Sistem Bakimda");
             }
             return new SuccessDataResult<List<Product>>(_productDal.GetAll());
         }
@@ -90,7 +91,7 @@ namespace Business.Concrete
             var result = _productDal.GetAll(p => p.CategoryId == categoryId).Count;
             if (result >= 15)
             {
-                return new ErorResult(Messages.ProductCountOfCategoryError);
+                return new ErrorResult(Messages.ProductCountOfCategoryError);
             }
             return new SuccessResult();
         }
@@ -99,18 +100,18 @@ namespace Business.Concrete
             var result = _productDal.GetAll(p => p.ProductName == productName).Any();
             if (result)
             {
-                return new ErorResult(Messages.ProductNameAlreadyExists);
+                return new ErrorResult(Messages.ProductNameAlreadyExists);
             }
             return new SuccessResult();
         }
         private IResult CheckIfCategoryLimitIsExceded()
         {
             var result = _categoryService.GetAll().Data.Count;
-            if (result<=15)
+            if (result <= 15)
             {
                 return new SuccessResult();
             }
-            return new ErorResult(Messages.CategoryLimitIsExceded);
+            return new ErrorResult(Messages.CategoryLimitIsExceded);
         }
     }
 
