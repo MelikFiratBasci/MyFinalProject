@@ -45,7 +45,7 @@ namespace Business.Concrete
 
 
         }
-
+        [CasheAspect] //cache'lenmek istenen data key,value,pair ile tutulur,Key cacheye verdigimiz adres ismi
         public IDataResult<List<Product>> GetAll()
         {
             //is kodlari , BIR IS SINIFI BASKA SINIFLARI NEWLEMEZ!!
