@@ -2,6 +2,8 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Concrete.Results;
@@ -28,6 +30,7 @@ namespace Business.Concrete
         }
         [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
+        [CacheRemoveAspect("IProductService.Get")]//eger urun eklenirse cachedeki product get datalarinin hepsi silinecek Db den birdaha cekilene kadar 
         public IResult Add(Product product)
         {
             //eger mevcut kategori sayisi 15 i gectiyse sisteme yeni urun eklenemez
@@ -45,7 +48,12 @@ namespace Business.Concrete
 
 
         }
-        [CasheAspect] //cache'lenmek istenen data key,value,pair ile tutulur,Key cacheye verdigimiz adres ismi
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Product product)//karsilikli islemler yapilirken para gonderme alma vb eger hatayla karsilasilirsa
+        {
+            throw new Exception();
+        }
+        [CacheAspect] //cache'lenmek istenen data:key,value,pair ile tutulur,Key cacheye verdigimiz adres ismi
         public IDataResult<List<Product>> GetAll()
         {
             //is kodlari , BIR IS SINIFI BASKA SINIFLARI NEWLEMEZ!!
@@ -62,7 +70,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(c => c.CategoryId == id));
         }
-
+        [CacheAspect]
         public IDataResult<Product> GetById(int id)
         {
             return new SuccessDataResult<Product>(_productDal.Get(c => c.ProductId == id));
@@ -79,6 +87,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(ProductValidator))]
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Update(Product product)
         {
 

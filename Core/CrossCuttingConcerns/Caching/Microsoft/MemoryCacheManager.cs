@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Core.CrossCuttingConcerns.Caching.Microsoft
+namespace Core.CrossCuttingConcerns.Caching.Microsoft 
+{ 
 
     public class MemoryCacheManager : ICacheManager
     {
@@ -20,7 +21,7 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
         }
         public void Add(string key, object value, int duration)
         {
-            _memoryCache.Set(key, value, TimeSpan.FromMinutes(duration);
+            _memoryCache.Set(key, value, TimeSpan.FromMinutes(duration));
         }
 
         public T Get<T>(string key)
