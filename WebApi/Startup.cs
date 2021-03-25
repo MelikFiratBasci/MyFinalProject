@@ -51,8 +51,8 @@ namespace WebApi
                     };
                 });
             services.AddDependencyResolvers(new ICoreModule[] {
-            new CoreModule()//bu sayede yeni moduller olusturursak onlari buraya ekleyebiliriz. 
-            });//core katmani da dahil tum katmanlardaki dependency injectionlari bir araya almamizi saglar.
+            new CoreModule()
+            });//core katmaninda dependency injectionlari bir araya almamizi saglar.
 
         }
 

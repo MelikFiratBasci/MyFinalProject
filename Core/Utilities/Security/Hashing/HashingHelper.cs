@@ -7,10 +7,10 @@ namespace Core.Utilities.Security.Hashing
     public class HashingHelper
     {
         public static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {//password verecegiz disariya outlu 2 degeri cikaricak
+        {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
             {
-                passwordSalt = hmac.Key;//key kullanilan algoritmanin kullanici icin olusturdugu key
+                passwordSalt = hmac.Key;//key:kullanilan algoritmanin kullanici icin olusturdugu key
                 passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             }
         }
