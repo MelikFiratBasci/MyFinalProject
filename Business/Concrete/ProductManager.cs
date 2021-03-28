@@ -58,17 +58,20 @@ namespace Business.Concrete
         {
             //is kodlari , BIR IS SINIFI BASKA SINIFLARI NEWLEMEZ!!
             //Yetkisi var mi
-            if (DateTime.Now.Hour == 20)
-            {
-                return new ErrorDataResult<List<Product>>("Sistem Bakimda");
-            }
+           
             return new SuccessDataResult<List<Product>>(_productDal.GetAll());
         }
 
 
         public IDataResult<List<Product>> GetAllByCategoryId(int id)
         {
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(c => c.CategoryId == id));
+            var result = _productDal.GetAll(p => p.CategoryId == id);
+            if (result !=null)
+            {
+                return new SuccessDataResult<List<Product>>(result);
+            }
+            return new ErrorDataResult<List<Product>>(result);
+
         }
         [CacheAspect]
         public IDataResult<Product> GetById(int id)
